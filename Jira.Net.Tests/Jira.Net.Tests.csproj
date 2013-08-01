@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4E517E82-BDBA-470D-AC64-FAD8FB598221}</ProjectGuid>
+    <ProjectGuid>{41F48A17-8BD8-4380-8E0F-7C7CC2668DB6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jira.Net</RootNamespace>
-    <AssemblyName>Jira.Net</AssemblyName>
+    <RootNamespace>Jira.Net.Tests</RootNamespace>
+    <AssemblyName>Jira.Net.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,13 +31,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework">
-      <HintPath>packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\jira.net\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp">
-      <HintPath>packages\RestSharp.104.1\lib\net4\RestSharp.dll</HintPath>
+      <HintPath>..\jira.net\packages\RestSharp.104.1\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="Shouldly">
-      <HintPath>packages\Shouldly.1.1.1.1\lib\35\Shouldly.dll</HintPath>
+      <HintPath>..\jira.net\packages\Shouldly.1.1.1.1\lib\35\Shouldly.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -48,9 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JiraClient.cs" />
-    <Compile Include="IJiraClient.cs" />
+    <Compile Include="JiraClientTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\jira.net\Jira.Net.csproj">
+      <Project>{4E517E82-BDBA-470D-AC64-FAD8FB598221}</Project>
+      <Name>Jira.Net</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -16,6 +16,14 @@ namespace Jira.Net
 			};
 		}
 
+		public IRestClient Client
+		{
+			get
+			{
+				return _client;				
+			}
+		}
+
 		public string Get(string resource)
 		{
 			var request = new RestRequest(resource);

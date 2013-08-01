@@ -14,12 +14,10 @@ properties {
 	$version = "0.0.0.0"
 	$date = Get-Date
 	$timestamp = "" + $date.Year + "." + $date.Month + "." + $date.Day + "." + $date.Hour + "." + $date.Minute
-
+	$nunit = "nunit.runners.2.6.2"
 	$build_output_directory = "$src_directory\bin\$target_config"
-  
-	$nunit_path = "$tools_directory\nunit\bin\nunit-console-x86.exe"
+	$nunit_path = "$packages_directory\$nunit\tools\nunit-console-x86.exe"
 	
-
 	if($runPersistenceTests -eq $null) {
 		$runPersistenceTests = $false
 	}
@@ -27,7 +25,7 @@ properties {
 
 task default -depends Build
 
-task Build -depends Clean, Compile #, Test, Package
+task Build -depends Clean, Compile, Test #, Package
 
 task UpdateVersion {
 	
@@ -52,12 +50,13 @@ task UpdateVersion {
 }
 
 task Compile -depends Clean {
-	exec { msbuild /nologo /verbosity:quiet $sln_file /p:Configuration=$target_config /p:TargetFrameworkVersion=v4.0 }
+	exec { msbuild /nologo /verbosity:quiet $sln_file /p:OutputPath=$output_directory /p:Configuration=$target_config /p:TargetFrameworkVersion=v4.0 }
 }
 
+
+
 task Test -depends Compile {
-	
-	exec { &$nunit_path "$base_directory/Jira.Net.Tests/bin/$target_config/PulseDoc.UnitTests.dll" /framework=4.0.30319 }
+	exec { &$nunit_path "$output_directory/Jira.Net.Tests.dll" /framework=4.0.30319 }
 }
 
 task Package -depends Clean, Compile {
